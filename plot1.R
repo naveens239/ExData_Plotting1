@@ -1,0 +1,7 @@
+hp <- read.table("household_power_consumption.txt", header=TRUE, sep=';', na.strings='?',nrows=1000000, stringsAsFactors=TRUE)
+hp$DateTime <- paste(hp$Date, hp$Time)
+hp$DateTime <- as.Date(hp$DateTime, format = "%d/%m/%Y %H:%M:%S")
+hp_req <- subset(hp, DateTime > "2007-02-01" & DateTime <= "2007-02-02")
+hist(hp_req$Global_active_power,xlab="Global Active Power (kilowatts)",ylab="Frequency", col="red", main="Global Active Power")
+dev.copy(png,file="plot1.png")
+dev.off()
